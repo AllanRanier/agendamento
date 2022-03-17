@@ -15,7 +15,16 @@ class CreateAgendamentoTable extends Migration
     {
         Schema::create('agendamento', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('grupo_id');
+            $table->string('protocolo', 10)->unique();
+            $table->dateTime('dia_horario');
+
+            $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('paciente_id')->references('id')->on('users');
+            $table->foreign('grupo_id')->references('id')->on('users');
         });
     }
 

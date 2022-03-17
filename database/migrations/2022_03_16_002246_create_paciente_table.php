@@ -26,6 +26,7 @@ class CreatePacienteTable extends Migration
             $table->string('bairro', 50)->nullable();
             $table->string('cidade', 50)->nullable();
             $table->string('uf', 2)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

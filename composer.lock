@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c61ff82cbf0142a401a48a8161e1595a",
+    "content-hash": "8f5616bb75d39c750447770eebd56b73",
     "packages": [
+        {
+            "name": "andersonhsilva/metodos-php",
+            "version": "20220304",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/andersonhsilva/metodos-php.git",
+                "reference": "a01d49980683a66fc2b2497b811ffe1c5869dbea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/andersonhsilva/metodos-php/zipball/a01d49980683a66fc2b2497b811ffe1c5869dbea",
+                "reference": "a01d49980683a66fc2b2497b811ffe1c5869dbea",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Andersonhsilva\\MetodosPhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "andersonhsilva",
+                    "email": "anderson.h.silva@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/andersonhsilva/metodos-php/issues",
+                "source": "https://github.com/andersonhsilva/metodos-php/tree/20220304"
+            },
+            "time": "2022-03-05T01:17:57+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
