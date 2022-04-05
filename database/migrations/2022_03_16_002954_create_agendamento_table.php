@@ -23,8 +23,8 @@ class CreateAgendamentoTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('paciente_id')->references('id')->on('users');
-            $table->foreign('grupo_id')->references('id')->on('users');
+            $table->foreign('paciente_id')->references('id')->on('paciente');
+            $table->foreign('grupo_id')->references('id')->on('grupo');
         });
     }
 

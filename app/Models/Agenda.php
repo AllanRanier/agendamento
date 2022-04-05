@@ -6,13 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Grupo extends Model
+class Agenda extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'grupo';
+    protected $table = 'agenda';
 
     protected $fillable = [
-        'nome',
+        'grupo_id',
+        'data_inicial',
+        'data_final',
     ];
+
+    public function grupo()
+    {
+        $this->belongsTo(Grupo::class);
+    }
 }

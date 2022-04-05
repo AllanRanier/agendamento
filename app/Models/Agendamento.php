@@ -15,6 +15,7 @@ class Agendamento extends Model
     protected $fillable = [
         'paciente_id',
         'grupo_id',
+        'agenda_id',
         'protocolo',
         'dia_horario',
     ];
@@ -29,5 +30,10 @@ class Agendamento extends Model
     public function grupo()
     {
         return $this->belongsTo(Grupo::class);
+    }
+
+    public function agenda()
+    {
+        return $this->belongsTo(Agenda::class);
     }
 }
