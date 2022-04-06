@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Usuários')
+@section('title', 'Lista de Grupos')
 
 @section('content_header')
-    <h1>Usuários</h1>
+    <h1>Grupos</h1>
 @stop
 
 @section('content')
@@ -66,15 +66,17 @@
 
 
             </div>
-            <div class="d-flex mb-3">
-                <div class="mr-auto small p-2">
+            <div class="row flex-between-end mt-3  justify-content-start">
+                <div class="col-auto align-self-right small mt-1">
                     <b>Total Registros:</b> Geral ({{ $usuarios->total() }}).
                 </div>
-                <div class="pagination pagination-sm p-2">
-                    {{ $usuarios->links('pagination::bootstrap-4') }}
+                <div class="col-auto align-self-left">
+                    <div class="pagination pagination-sm">
+                        {{ $usuarios->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
-
             </div>
+
         </div>
         <div class="card-footer mt-2">
             <a href="{{ route('usuarios.index') }}" class="btn btn-secondary" style="margin-left: 5px"><i
@@ -84,4 +86,14 @@
         </div>
     </div>
 
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script>
+        console.log('Hi!');
+    </script>
 @stop
