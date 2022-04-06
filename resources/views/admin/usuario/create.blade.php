@@ -3,8 +3,8 @@
 @section('title', 'Usuário')
 
 @section('content_header')
-    @if ()
-<h1><b>CADASTRO</b> - Usuário</h1>
+    @if (isset($usuario))
+        <h1><b>Editando</b> o usuário - {{ $usuario['name'] }}</h1>
     @else
         <h1><b>CADASTRO</b> - Usuário</h1>
     @endif

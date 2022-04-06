@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioStoreRequest;
+use App\Http\Requests\UsuarioUpdatRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,13 @@ class UsuarioController extends Controller
     {
         $usuarios = User::paginate(15);
         return view('admin.usuario.index', compact('usuarios'));
+    }
+
+    public function search(Request $request)
+    {
+        $usuarios = User::search($request->parametro, $request->informacao)->paginate(15);
+        return view('admin.usuario.index', compact('usuarios'));
+
     }
 
     /**
@@ -58,7 +66,7 @@ class UsuarioController extends Controller
 
         Auth::login($user);
 
-        return redirect()->back()->with('sucesso', 'Cadastrado com sucesso.');
+        return redirect()->route('usuarios.index')->with('sucesso', 'Cadastrado com sucesso.');
     }
 
     /**
@@ -96,9 +104,24 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsuarioUpdatRequest $request, $id)
     {
-        //
+        // editando com a senha para evitar erro
+        if ($request->password) {
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+            return redirect()->route('usuarios.index')->with('sucesso', 'Usuário editado com sucesso.');
+        }
+
+        User::find($id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('usuarios.index')->with('sucesso', 'Usuário editado com sucesso.');
     }
 
     /**
@@ -109,6 +132,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+
+        return redirect()->back()->with('sucesso', 'Usuário excluído com sucesso.');
     }
 }

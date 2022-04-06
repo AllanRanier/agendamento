@@ -3,9 +3,8 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    <ul>
-        <li>{!! \Session::get('sucesso') !!}</li>
-    </ul>
+        <p class="alert-heading">{!! \Session::get('sucesso') !!}</p>
+
 </div>
 @endif
 @if (\Session::has('error'))
@@ -17,7 +16,7 @@
     <div class="mb-3 font-medium text-red-600">
         <b>Opa!Algo deu errado.</b>
     </div>
-    <ul>
+    <ul style="list-style: none;">
         <li>{!! \Session::get('error') !!}</li>
     </ul>
 </div>
@@ -27,7 +26,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    <ul>
+    <ul style="list-style: none;">
         <li>{!! \Session::get('info') !!}</li>
     </ul>
 </div>
@@ -44,7 +43,7 @@
     </div>
 
     @foreach ($errors->all() as $error)
-    <ul>
+    <ul style="list-style: none;">
         <li>
             {{ $error }}
         </li>

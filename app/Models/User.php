@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function search($parametro, $informacao)
+    {
+        return User::where($parametro, 'LIKE', "%$informacao%")->orderBy('id', 'ASC');
+    }
 }

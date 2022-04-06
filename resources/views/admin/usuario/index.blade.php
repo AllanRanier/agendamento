@@ -10,7 +10,9 @@
 
     <div class="card">
         <div class="card-header">
-            <form action="" method="get">
+            @include('layouts.modal')
+            @include('layouts.alert')
+            <form action="{{ route('usuarios.search') }}" method="get">
                 <div class="form-row">
                     <div class="col">
                         <select class="form-control" id="parametro" name="parametro">
