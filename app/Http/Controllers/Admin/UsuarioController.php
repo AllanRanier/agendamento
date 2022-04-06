@@ -24,7 +24,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = User::paginate(1);
+        $usuarios = User::paginate(15);
         return view('admin.usuario.index', compact('usuarios'));
     }
 
@@ -42,7 +42,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('admin.usuario.create');
+        return view('admin.usuario.form');
     }
 
     /**
@@ -94,7 +94,7 @@ class UsuarioController extends Controller
             return redirect()->back()->with('error', 'Usuário não encontrado.');
         }
 
-        return view('admin.usuario.create', compact('usuario'));
+        return view('admin.usuario.form', compact('usuario'));
     }
 
     /**

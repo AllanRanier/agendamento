@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GrupoStoreUpdateRequest;
+use App\Models\Grupo;
 use Illuminate\Http\Request;
 
 class GrupoController extends Controller
@@ -14,7 +16,17 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        //
+        $grupos = Grupo::paginate(15);
+
+        return view('admin.grupo.index', compact('grupos'));
+    }
+
+
+    public function search(Request $request)
+    {
+        $grupos = Grupo::search($request->parametro, $request->informacao)->paginate(15);
+        return view('admin.grupo.index', compact('grupos'));
+
     }
 
     /**
@@ -24,7 +36,8 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.grupo.form');
+
     }
 
     /**
@@ -35,7 +48,9 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Grupo::create($request->all());
+
+        return redirect()->route('grupos.index')->with('sucesso', 'Cadastrado com sucesso.');
     }
 
     /**
@@ -57,7 +72,13 @@ class GrupoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $grupo = Grupo::find($id);
+
+        if ($grupo == null) {
+            return redirect()->back()->with('error', 'Grupo não encontrado.');
+        }
+
+        return view('admin.grupo.form', compact('grupo'));
     }
 
     /**
@@ -67,9 +88,11 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GrupoStoreUpdateRequest $request, $id)
     {
-        //
+        Grupo::find($id)->update($request->all());
+
+        return redirect()->route('grupos.index')->with('sucesso', 'Grupo editado com sucesso.');
     }
 
     /**
@@ -80,6 +103,8 @@ class GrupoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Grupo::find($id)->delete();
+
+        return redirect()->back()->with('sucesso', 'Grupo excluído com sucesso.');
     }
 }

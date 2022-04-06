@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\Admin\{
+    GrupoController,
+    UsuarioController,
+};
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,5 +40,16 @@ Route::prefix('admin')->group(function () {
         Route::post('update/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
         Route::get('destroy/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
         Route::get('search', [UsuarioController::class, 'search'])->name('usuarios.search');
+    });
+
+
+    Route::prefix('grupos')->group(function () {
+        Route::get('index', [GrupoController::class, 'index'])->name('grupos.index');
+        Route::get('create', [GrupoController::class, 'create'])->name('grupos.create');
+        Route::post('store', [GrupoController::class, 'store'])->name('grupos.store');
+        Route::get('edit/{id}', [GrupoController::class, 'edit'])->name('grupos.edit');
+        Route::post('update/{id}', [GrupoController::class, 'update'])->name('grupos.update');
+        Route::get('destroy/{id}', [GrupoController::class, 'destroy'])->name('grupos.destroy');
+        Route::get('search', [GrupoController::class, 'search'])->name('grupos.search');
     });
 });

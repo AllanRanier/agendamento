@@ -15,4 +15,9 @@ class Grupo extends Model
     protected $fillable = [
         'nome',
     ];
+
+    public static function search($parametro, $informacao)
+    {
+        return Grupo::where($parametro, 'LIKE', "%$informacao%")->orderBy('id', 'ASC');
+    }
 }

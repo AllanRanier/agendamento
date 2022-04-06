@@ -12,13 +12,12 @@
         <div class="card-header">
             @include('layouts.modal')
             @include('layouts.alert')
-            <form action="{{ route('usuarios.search') }}" method="get">
+            <form action="{{ route('grupos.search') }}" method="get">
                 <div class="form-row">
                     <div class="col">
                         <select class="form-control" id="parametro" name="parametro">
                             <option value="id">ID</option>
-                            <option value="name">Nome</option>
-                            <option value="email">E-mail</option>
+                            <option value="nome">Nome</option>
                         </select>
                     </div>
                     <div class="col">
@@ -35,22 +34,20 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="text-end">Ações</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($usuarios) > 0)
-                            @foreach ($usuarios as $usuario)
+                        @if (count($grupos) > 0)
+                            @foreach ($grupos as $grupo)
                                 <tr>
-                                    <td>{{ $usuario->id }}</td>
-                                    <td>{{ $usuario->name }}</td>
-                                    <td>{{ $usuario->email }}</td>
+                                    <td>{{ $grupo->id }}</td>
+                                    <td>{{ $grupo->nome }}</td>
                                     <td style="white-space: nowrap">
-                                        <a href="{{ route('usuarios.edit', ['id' => $usuario->id]) }}"
+                                        <a href="{{ route('grupos.edit', ['id' => $grupo->id]) }}"
                                             class="btn btn-primary btn-sm" title="Editar"><i
                                                 class="fas fa-edit"></i></i></a>
-                                        <a onclick="javascript:confirm_delete('Deseja realmente excluir o registro do usuário: {{ $usuario->name }}, selecionado?', '{{ route('usuarios.destroy', ['id' => $usuario->id]) }}');"
+                                        <a onclick="javascript:confirm_delete('Deseja realmente excluir o registro do grupo: {{ $grupo->nome }}, selecionado?', '{{ route('grupos.destroy', ['id' => $grupo->id]) }}');"
                                             class="btn btn-danger btn-sm" title="Excluir"><i
                                                 class="far fa-trash-alt"></i></a>
                                     </td>
@@ -66,34 +63,21 @@
 
 
             </div>
-            <div class="row flex-between-end mt-3  justify-content-start">
-                <div class="col-auto align-self-right small mt-1">
-                    <b>Total Registros:</b> Geral ({{ $usuarios->total() }}).
+            <div class="d-flex mb-3">
+                <div class="mr-auto small p-2">
+                    <b>Total Registros:</b> Geral ({{ $grupos->total() }}).
                 </div>
-                <div class="col-auto align-self-left">
-                    <div class="pagination pagination-sm">
-                        {{ $usuarios->links('pagination::bootstrap-4') }}
-                    </div>
+                <div class="pagination pagination-sm p-2">
+                    {{ $grupos->links('pagination::bootstrap-4') }}
                 </div>
-            </div>
 
+            </div>
         </div>
         <div class="card-footer mt-2">
-            <a href="{{ route('usuarios.index') }}" class="btn btn-secondary" style="margin-left: 5px"><i
+            <a href="{{ route('grupos.index') }}" class="btn btn-secondary" style="margin-left: 5px"><i
                     class="fas fa-list-ul"></i> Listar</a>
-            <a href="{{ route('usuarios.create') }}" class="btn btn-primary" style="margin-left: 5px"><i
+            <a href="{{ route('grupos.create') }}" class="btn btn-primary" style="margin-left: 5px"><i
                     class="fas fa-plus-circle"></i> Cadastrar</a>
         </div>
     </div>
-
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script>
-        console.log('Hi!');
-    </script>
 @stop
