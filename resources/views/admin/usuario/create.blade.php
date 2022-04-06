@@ -1,9 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastro - Usuário')
+@section('title', 'Usuário')
 
 @section('content_header')
-    <h1><b>CADASTRO</b> - Usuário</h1>
+    @if ()
+<h1><b>CADASTRO</b> - Usuário</h1>
+    @else
+        <h1><b>CADASTRO</b> - Usuário</h1>
+    @endif
 @stop
 
 @section('content')
@@ -11,7 +15,8 @@
     <div class="card">
         <div class="card-body">
             <!-- Validation Errors -->
-            <x-auth-validation-errors class="alert alert-danger mb-4" :errors="$errors" />
+            {{-- <x-auth-validation-errors class="mb-4 alert alert-danger" :errors="$errors" /> --}}
+            @include('layouts.alert')
             <form
                 action="{{ !@$usuario ? route('usuarios.store') : route('usuarios.update', ['id' => @$usuario['id']]) }}"
                 method="POST">
@@ -46,7 +51,7 @@
                     <div class="col col-sm-4">
                         <div class="form-group">
                             <label for="">Senha (Confirmação)</label>
-                            <input type="password" class="form-control" name="password-confirm" id="password-confirm"
+                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
                                 placeholder="">
                         </div>
                     </div>
@@ -57,7 +62,7 @@
             <a class="btn btn-sm btn-danger" href="{{ route('usuarios.create') }}"><i class="fa fa-ban"></i>
                 Limpar</a>
             <a class="btn btn-sm btn-secondary" href="{{ route('usuarios.index') }}"><i class="fas fa-chevron-left"></i>
-                Gerenciamento</a>
+                Voltar</a>
         </div>
     </div>
     </form>
@@ -71,7 +76,4 @@
 @stop
 
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
 @stop

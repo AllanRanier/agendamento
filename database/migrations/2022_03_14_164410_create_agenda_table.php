@@ -16,8 +16,8 @@ class CreateAgendaTable extends Migration
         Schema::create('agenda', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('grupo_id');
-            $table->timestamp('data_inicial');
-            $table->timestamp('data_final');
+            $table->dateTime('data_inicial');
+            $table->dateTime('data_final');
 
 
             $table->softDeletes();

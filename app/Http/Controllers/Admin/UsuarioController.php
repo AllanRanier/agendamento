@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsuarioStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,13 +45,8 @@ class UsuarioController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(UsuarioStoreRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
 
         $user = User::create([
             'name' => $request->name,
@@ -62,7 +58,7 @@ class UsuarioController extends Controller
 
         Auth::login($user);
 
-        // return redirect(RouteServiceProvider::HOME);
+        return redirect()->back()->with('sucesso', 'Cadastrado com sucesso.');
     }
 
     /**
@@ -84,7 +80,13 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+
+        if ($usuario == null) {
+            return redirect()->back()->with('error', 'Usuário não encontrado.');
+        }
+
+        return view('admin.usuario.create', compact('usuario'));
     }
 
     /**
