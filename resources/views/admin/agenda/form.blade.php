@@ -26,11 +26,9 @@
                             <select class="form-control" name="grupo_id" id="grupo_id">
                                 <option value="">Selecionar</option>
                                 @foreach ($grupos as $option)
-                                    <option @if ($option->id == old('grupo_id') || $option->id == @$grupo->grupo_id) selected @endif  value="{{ $option->id }}">{{ $option->nome }}</option>
+                                    <option @if ($option->id == old('grupo_id') || $option->id == @$agenda->grupo_id) selected @endif  value="{{ $option->id }}">{{ $option->nome }}</option>
                                 @endforeach
                             </select>
-                            {{-- <input type="text" class="form-control" name="nome" id="nome" placeholder="" required
-                                value="{{ @$agenda['nome'] ?? old('nome') }}"> --}}
                         </div>
                     </div>
                     <div class="col-6">
