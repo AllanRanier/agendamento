@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\{
     AgendaController,
     AgendamentoController,
+    DashboardController,
     GrupoController,
     PacienteController,
     UsuarioController,
@@ -34,6 +35,8 @@ require __DIR__.'/auth.php';
 
 
 Route::prefix('admin')->group(function () {
+
+    Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('usuarios')->group(function () {
         Route::get('index', [UsuarioController::class, 'index'])->name('usuarios.index');
