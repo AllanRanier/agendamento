@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label for=""><span style="color:red">*</span> Data da Vacinação</label>
                             <input type="datetime-local" class="form-control" name="data_inicial" id="data_inicial"
-                                value="{{ date('Y-m-d\TH:i', strtotime(@$agenda['data_inicial'])) ?? old('data_inicial') }}">
+                                value="{{ Helper::mascara_data(@$agenda->data_inicial, 'Y-m-d\TH:i')  ?? old('data_inicial') }}">
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for=""><span style="color:red">*</span> Data Final da Vacinação</label>
                             <input type="datetime-local" class="form-control" name="data_final" id="data_final"
-                                value="{{ date('Y-m-d\TH:i', strtotime(@$agenda['data_final'])) ?? old('data_final') }}">
+                                value="{{ Helper::mascara_data(@$agenda->data_final, 'Y-m-d\TH:i') ?? old('data_final') }}">
                         </div>
                     </div>
                 </div>

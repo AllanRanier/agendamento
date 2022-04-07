@@ -45,13 +45,13 @@
                                 <tr>
                                     <td>{{ $agenda->id }}</td>
                                     <td>{{ $agenda->grupo->nome }}</td>
-                                    <td>{{ date('d/m/Y H:i', strtotime($agenda->data_inicial)) }}</td>
-                                    <td>{{ date('d/m/Y H:i', strtotime($agenda->data_final)) }}</td>
+                                    <td>{{ Helper::mascara_data(@$agenda->data_inicial, 'd/m/Y H:i') }}</td>
+                                    <td>{{ Helper::mascara_data(@$agenda->data_final, 'd/m/Y H:i')}}</td>
                                     <td style="white-space: nowrap">
                                         <a href="{{ route('agendas.edit', ['id' => $agenda->id]) }}"
                                             class="btn btn-primary btn-sm" title="Editar"><i
                                                 class="fas fa-edit"></i></i></a>
-                                        <a onclick="javascript:confirm_delete('Deseja realmente excluir o registro do agenda: {{ $agenda->nome }}, selecionado?', '{{ route('agendas.destroy', ['id' => $agenda->id]) }}');"
+                                        <a onclick="javascript:confirm_delete('Deseja realmente excluir o registro do agenda selecionado?', '{{ route('agendas.destroy', ['id' => $agenda->id]) }}');"
                                             class="btn btn-danger btn-sm" title="Excluir"><i
                                                 class="far fa-trash-alt"></i></a>
                                     </td>
