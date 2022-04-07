@@ -19,9 +19,6 @@ class Agenda extends Model
         'data_final',
     ];
 
-
-
-
     public function grupo()
     {
         return $this->belongsTo(Grupo::class, 'grupo_id');

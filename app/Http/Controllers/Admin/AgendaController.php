@@ -24,13 +24,6 @@ class AgendaController extends Controller
     }
 
 
-    public function search(Request $request)
-    {
-        $agendas = Agenda::search($request->parametro, $request->informacao)->paginate(15);
-
-        return view('admin.grupo.index', compact('agendas'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -83,7 +76,6 @@ class AgendaController extends Controller
         $grupos = Grupo::orderBy('id', 'ASC')->get();
 
         return view('admin.agenda.form', compact('agenda', 'grupos'));
-
     }
 
     /**

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\{
     AgendaController,
+    AgendamentoController,
     GrupoController,
+    PacienteController,
     UsuarioController,
 };
 
@@ -60,6 +62,25 @@ Route::prefix('admin')->group(function () {
         Route::get('edit/{id}', [AgendaController::class, 'edit'])->name('agendas.edit');
         Route::post('update/{id}', [AgendaController::class, 'update'])->name('agendas.update');
         Route::get('destroy/{id}', [AgendaController::class, 'destroy'])->name('agendas.destroy');
-        Route::get('search', [AgendaController::class, 'search'])->name('agendas.search');
+    });
+
+    Route::prefix('agendamentos')->group(function () {
+        Route::get('index', [AgendamentoController::class, 'index'])->name('agendamentos.index');
+        Route::get('create', [AgendamentoController::class, 'create'])->name('agendamentos.create');
+        Route::post('store', [AgendamentoController::class, 'store'])->name('agendamentos.store');
+        Route::get('edit/{id}', [AgendamentoController::class, 'edit'])->name('agendamentos.edit');
+        Route::post('update/{id}', [AgendamentoController::class, 'update'])->name('agendamentos.update');
+        Route::get('destroy/{id}', [AgendamentoController::class, 'destroy'])->name('agendamentos.destroy');
+        Route::get('search', [AgendamentoController::class, 'search'])->name('agendamentos.search');
+    });
+
+    Route::prefix('pacientes')->group(function () {
+        Route::get('index', [PacienteController::class, 'index'])->name('pacientes.index');
+        Route::get('create', [PacienteController::class, 'create'])->name('pacientes.create');
+        Route::post('store', [PacienteController::class, 'store'])->name('pacientes.store');
+        Route::get('edit/{id}', [PacienteController::class, 'edit'])->name('pacientes.edit');
+        Route::post('update/{id}', [PacienteController::class, 'update'])->name('pacientes.update');
+        Route::get('destroy/{id}', [PacienteController::class, 'destroy'])->name('pacientes.destroy');
+        Route::get('search', [PacienteController::class, 'search'])->name('pacientes.search');
     });
 });

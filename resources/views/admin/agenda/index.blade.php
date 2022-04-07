@@ -12,20 +12,6 @@
         <div class="card-header">
             @include('layouts.modal')
             @include('layouts.alert')
-            <form action="{{ route('agendas.search') }}" method="get">
-                <div class="form-row">
-                    <div class="col">
-                        <select class="form-control" id="parametro" name="parametro">
-                            <option value="id">ID</option>
-                            <option value="nome">Nome</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="informacao" name="informacao" placeholder="Infome os dados de sua busca">
-                    </div>
-                    <button type="submit" class="btn btn-info">Pesquisar</button>
-                </div>
-            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
