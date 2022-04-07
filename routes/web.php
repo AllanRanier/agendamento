@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\{
+    AgendaController,
     GrupoController,
     UsuarioController,
 };
@@ -42,7 +43,6 @@ Route::prefix('admin')->group(function () {
         Route::get('search', [UsuarioController::class, 'search'])->name('usuarios.search');
     });
 
-
     Route::prefix('grupos')->group(function () {
         Route::get('index', [GrupoController::class, 'index'])->name('grupos.index');
         Route::get('create', [GrupoController::class, 'create'])->name('grupos.create');
@@ -51,5 +51,15 @@ Route::prefix('admin')->group(function () {
         Route::post('update/{id}', [GrupoController::class, 'update'])->name('grupos.update');
         Route::get('destroy/{id}', [GrupoController::class, 'destroy'])->name('grupos.destroy');
         Route::get('search', [GrupoController::class, 'search'])->name('grupos.search');
+    });
+
+    Route::prefix('agendas')->group(function () {
+        Route::get('index', [AgendaController::class, 'index'])->name('agendas.index');
+        Route::get('create', [AgendaController::class, 'create'])->name('agendas.create');
+        Route::post('store', [AgendaController::class, 'store'])->name('agendas.store');
+        Route::get('edit/{id}', [AgendaController::class, 'edit'])->name('agendas.edit');
+        Route::post('update/{id}', [AgendaController::class, 'update'])->name('agendas.update');
+        Route::get('destroy/{id}', [AgendaController::class, 'destroy'])->name('agendas.destroy');
+        Route::get('search', [AgendaController::class, 'search'])->name('agendas.search');
     });
 });

@@ -14,7 +14,7 @@
     </button>
 
     <div class="mb-3 font-medium text-red-600">
-        <b>Opa!Algo deu errado.</b>
+        <b>Opa!</b> Algo deu errado.
     </div>
     <ul style="list-style: none;">
         <li>{!! \Session::get('error') !!}</li>
@@ -39,7 +39,7 @@
     </button>
 
     <div class="mb-3 font-medium text-red-600">
-        <b>Opa!Algo deu errado.</b>
+        <b>Opa!</b> Algo deu errado.
     </div>
 
     @foreach ($errors->all() as $error)

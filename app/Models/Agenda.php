@@ -20,6 +20,6 @@ class Agenda extends Model
 
     public function grupo()
     {
-        $this->belongsTo(Grupo::class);
+        return $this->belongsTo(Grupo::class, 'grupo_id');
     }
 }

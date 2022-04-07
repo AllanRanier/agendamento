@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AgendaStoreUpdateRequest;
+use App\Models\Agenda;
+use App\Models\Grupo;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,17 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        //
+        $agendas = Agenda::paginate(15);
+
+        return view('admin.agenda.index', compact('agendas'));
+    }
+
+
+    public function search(Request $request)
+    {
+        $agendas = Agenda::search($request->parametro, $request->informacao)->paginate(15);
+
+        return view('admin.grupo.index', compact('agendas'));
     }
 
     /**
@@ -24,7 +38,9 @@ class AgendaController extends Controller
      */
     public function create()
     {
-        //
+        $grupos = Grupo::orderBy('id', 'ASC')->get();
+
+        return view('admin.agenda.form', compact('grupos'));
     }
 
     /**
@@ -33,9 +49,11 @@ class AgendaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AgendaStoreUpdateRequest $request)
     {
-        //
+        Agenda::create($request->all());
+
+        return redirect()->route('agendas.index')->with('sucesso', 'Cadastrado com sucesso.');
     }
 
     /**
@@ -57,7 +75,15 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $agenda = Agenda::find($id);
+
+        if ($agenda == null) {
+            return redirect()->back()->with('error', 'Agenda não encontrado.');
+        }
+        $grupos = Grupo::orderBy('id', 'ASC')->get();
+
+        return view('admin.agenda.form', compact('agenda', 'grupos'));
+
     }
 
     /**
@@ -67,9 +93,11 @@ class AgendaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AgendaStoreUpdateRequest $request, $id)
     {
-        //
+        Agenda::find($id)->update($request->all());
+
+        return redirect()->route('agendas.index')->with('sucesso', 'Editado com sucesso.');
     }
 
     /**
@@ -80,6 +108,8 @@ class AgendaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Agenda::find($id)->delete();
+
+        return redirect()->back()->with('sucesso', 'Excluído com sucesso.');
     }
 }
