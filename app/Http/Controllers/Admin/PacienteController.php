@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\PacienteStoreUpdateRequest;
+use App\Models\Grupo;
+use App\Models\Paciente;
 
 class PacienteController extends Controller
 {
@@ -14,8 +16,11 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $pacientes = Paciente::paginate(15);
+
+        return view('admin.paciente.index', compact('pacientes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +29,9 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        $grupos = Grupo::orderBy('id', 'ASC')->get();
+
+        return view('admin.paciente.form', compact('grupos'));
     }
 
     /**
@@ -33,9 +40,11 @@ class PacienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PacienteStoreUpdateRequest $request)
     {
-        //
+        Paciente::create($request->all());
+
+        return redirect()->route('pacientes.index')->with('sucesso', 'Cadastrado com sucesso.');
     }
 
     /**
@@ -57,7 +66,14 @@ class PacienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $paciente = Paciente::find($id);
+
+        if ($paciente == null) {
+            return redirect()->back()->with('error', 'paciente não encontrado.');
+        }
+        $grupos = Grupo::orderBy('id', 'ASC')->get();
+
+        return view('admin.paciente.form', compact('paciente', 'grupos'));
     }
 
     /**
@@ -67,9 +83,11 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PacienteStoreUpdateRequest $request, $id)
     {
-        //
+        Paciente::find($id)->update($request->all());
+
+        return redirect()->route('pacientes.index')->with('sucesso', 'Editado com sucesso.');
     }
 
     /**
@@ -80,6 +98,8 @@ class PacienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Paciente::find($id)->delete();
+
+        return redirect()->back()->with('sucesso', 'Excluído com sucesso.');
     }
 }
