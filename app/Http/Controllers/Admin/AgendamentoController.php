@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Agendamento;
+use App\Models\Grupo;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class AgendamentoController extends Controller
@@ -14,7 +18,17 @@ class AgendamentoController extends Controller
      */
     public function index()
     {
-        //
+        $agendamentos = Agendamento::paginate(15);
+
+        return view('admin.agendamento.index', compact('agendamentos'));
+    }
+
+
+    public function search(Request $request)
+    {
+        $agendamentos = Grupo::search($request->parametro, $request->informacao)->paginate(15);
+        return view('admin.grupo.index', compact('agendamentos'));
+
     }
 
     /**
@@ -24,7 +38,10 @@ class AgendamentoController extends Controller
      */
     public function create()
     {
-        //
+        $grupos = Grupo::orderBy('id', 'ASC')->get();
+        $pacientes = Paciente::orderBy('id', 'ASC')->get();
+
+        return view('admin.agendamento.form', compact('grupos', 'pacientes'));
     }
 
     /**
@@ -35,7 +52,11 @@ class AgendamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['protocolo'] = Helper::gerandoProtocolo();
+        Agendamento::create($data);
+
+        return redirect()->route('agendamentos.index')->with('sucesso', 'Cadastrado com sucesso.');
     }
 
     /**
@@ -57,7 +78,16 @@ class AgendamentoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $agendamento = Grupo::find($id);
+
+        if ($agendamento == null) {
+            return redirect()->back()->with('error', 'Grupo não encontrado.');
+        }
+
+        $grupo = Grupo::orderBy('id', 'ASC')->get();
+        $paciente = Paciente::orderBy('id', 'ASC')->get();
+
+        return view('admin.agendamento.form', compact('agendamento', 'grupo', 'paciente'));
     }
 
     /**
@@ -69,7 +99,9 @@ class AgendamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Grupo::find($id)->update($request->all());
+
+        return redirect()->route('agendamentos.index')->with('sucesso', 'Grupo editado com sucesso.');
     }
 
     /**
@@ -80,6 +112,8 @@ class AgendamentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Grupo::find($id)->delete();
+
+        return redirect()->back()->with('sucesso', 'Grupo excluído com sucesso.');
     }
 }

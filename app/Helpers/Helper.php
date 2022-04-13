@@ -716,4 +716,49 @@ if (!isCpfValid($cpf)){ echo 'cpf invalido'}
             return trim(ucwords($rt) ? ucwords($rt) : "Zero");
         }
     }
+
+    public static function calculoIdade($date_nascimento){
+
+        $data = explode("-", $date_nascimento);
+
+        $anoNasc = $data[0];
+        $mesNasc = $data[1];
+        $diaNasc = $data[2];
+
+        $anoAtual   = date("Y");
+        $mesAtual   = date("m");
+        $diaAtual   = date("d");
+
+        $idade = $anoAtual - $anoNasc;
+
+        if($mesAtual < $mesNasc){
+            $idade -= 1;
+        }else if( ($mesAtual == $mesNasc) && ($diaAtual <= $diaNasc)){
+            $idade -= 1;
+        }
+        return $idade;
+    }
+
+    public static function gerandoProtocolo($length = 9) {
+        $palavras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numeros = '0123456789';
+        $palavrasLength = strlen($palavras);
+        $numerosLength = strlen($numeros);
+        // $numerosAleatorio = '';
+        // $palavrasAleatoria = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $palavrasAleatoria1 = $palavras[rand(0, $palavrasLength - 1)];
+            $numerosAleatorio1 = $numeros[rand(0, $numerosLength - 1)];
+            $numerosAleatorio2 = $numeros[rand(0, $numerosLength - 1)];
+            $numerosAleatorio3= $numeros[rand(0, $numerosLength - 1)];
+            $palavrasAleatoria2 = $palavras[rand(0, $palavrasLength - 1)];
+            $palavrasAleatoria3 = $palavras[rand(0, $palavrasLength - 1)];
+            $numerosAleatorio4= $numeros[rand(0, $numerosLength - 1)];
+        }
+
+        $protocolo = $palavrasAleatoria1 . $numerosAleatorio1 . $numerosAleatorio2 . $numerosAleatorio3 . $palavrasAleatoria2 . $palavrasAleatoria3 . $numerosAleatorio4;
+
+        return $protocolo;
+    }
 }
