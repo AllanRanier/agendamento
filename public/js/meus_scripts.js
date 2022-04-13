@@ -70,16 +70,15 @@ function searchAddress() {
     if (this.tagName == 'SPAN') {
         var cep = $("#cep").val().replaceAll(/\D/g, '');
         if (cep != "") {
-            $("#endereco").val("");
+            $("#logradouro").val("");
             $("#bairro").val("");
             $("#cidade").val("");
             $("#uf").val("");
-            $("#uf_associado").val("");
             $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(result) {
                 if (result.error == null) {
                     console.log(result)
                     //Atualiza os campos com os valores da consulta.
-                    $("#endereco").val(result.logradouro);
+                    $("#logradouro").val(result.logradouro);
                     $("#bairro").val(result.bairro);
                     $("#cidade").val(result.localidade);
                     $("#uf").val(result.uf);

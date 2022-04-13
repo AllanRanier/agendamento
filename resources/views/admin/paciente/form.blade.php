@@ -16,7 +16,7 @@
     <div class="card-body">
         @include('layouts.alert')
         <form
-            action="{{ !@$pacientes ? route('pacientes.store') : route('pacientes.update', ['id' => @$pacientes['id']]) }}"
+            action="{{ !@$paciente ? route('pacientes.store') : route('pacientes.update', ['id' => @$paciente['id']]) }}"
             method="POST">
             @csrf
 
@@ -25,21 +25,21 @@
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Nome</label>
                         <input type="text" class="form-control" name="nome" id="nome" required
-                            value="{{ @$pacientes['nome'] ?? old('nome') }}">
+                            value="{{ @$paciente['nome'] ?? old('nome') }}">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> CPF</label>
                         <input type="text" class="form-control cpf" name="cpf" id="cpf" required
-                            value="{{ @$pacientes['cpf'] ?? old('cpf') }}">
+                            value="{{ @$paciente['cpf'] ?? old('cpf') }}">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Data de Nascimento</label>
-                        <input type="date" class="form-control" name="nome" id="nome" required
-                            value="{{ @$pacientes['nome'] ?? old('nome') }}">
+                        <input type="date" class="form-control" name="nascimento" id="nascimento" required
+                            value="{{ @$paciente['nascimento'] ?? old('nascimento') }}">
                     </div>
                 </div>
             </div>
@@ -48,44 +48,48 @@
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> WhatsApp</label>
                         <input type="text" class="form-control phone" name="telefone1" id="telefone1" required
-                            value="{{ @$pacientes['telefone1'] ?? old('telefone1') }}">
+                            value="{{ @$paciente['telefone1'] ?? old('telefone1') }}">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="form-group">
                         <label for="">Telefone</label>
                         <input type="text" class="form-control phone" name="telefone2" id="telefone2"
-                            value="{{ @$pacientes['telefone2'] ?? old('telefone2') }}">
+                            value="{{ @$paciente['telefone2'] ?? old('telefone2') }}">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-md-2 col-lg-2">
-                    <div class="form-group">
-                        <label for=""><span style="color:red">*</span> CEP</label>
-                        <input type="text" class="form-control cep" name="cep" id="cep" required
-                            value="{{ @$pacientes['cep'] ?? old('cep') }}">
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <label for=""><span style="color:red">*</span> CEP</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="cep" name="cep"
+                            value="{{ @$paciente['cep'] ?? old('cep') }}">
+                        <span class="input-group-text">
+                            <span title="Clique para buscar endereço automático" style="cursor:pointer"
+                                class="text-900 fs-1 far fa-map"></span>
+                        </span>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Logradouro</label>
-                        <input type="text" class="form-control" name="telefone2" id="telefone2" required
-                            value="{{ @$pacientes['telefone2'] ?? old('telefone2') }}">
+                        <input type="text" class="form-control" name="logradouro" id="logradouro" required
+                            value="{{ @$paciente['logradouro'] ?? old('logradouro') }}">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-2 col-lg-2">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Número</label>
                         <input type="text" class="form-control" name="numero" id="numero" required
-                            value="{{ @$pacientes['numero'] ?? old('numero') }}">
+                            value="{{ @$paciente['numero'] ?? old('numero') }}">
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Bairro</label>
-                        <input type="text" class="form-control" name="numero" id="numero" required
-                            value="{{ @$pacientes['numero'] ?? old('numero') }}">
+                        <input type="text" class="form-control" name="bairro" id="bairro" required
+                            value="{{ @$paciente['bairro'] ?? old('bairro') }}">
                     </div>
                 </div>
             </div>
@@ -94,15 +98,15 @@
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Cidade</label>
-                        <input type="text" class="form-control cep" name="cep" id="cep" required
-                            value="{{ @$pacientes['cep'] ?? old('cep') }}">
+                        <input type="text" class="form-control cep" name="cidade" id="cidade" required
+                            value="{{ @$paciente['cidade'] ?? old('cidade') }}">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="form-group">
                         <label for=""><span style="color:red">*</span> Estado</label>
-                        <input type="text" class="form-control" name="telefone2" id="telefone2" required
-                            value="{{ @$pacientes['telefone2'] ?? old('telefone2') }}">
+                        <input type="text" class="form-control" name="uf" id="uf" required
+                            value="{{ @$paciente['uf'] ?? old('uf') }}">
                     </div>
                 </div>
             </div>

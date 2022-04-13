@@ -54,5 +54,5 @@
 
 
 <script>
-    $(".alert").alert('close')
+    // $(".alert").alert('close')
 </script>

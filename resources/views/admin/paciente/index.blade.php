@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>{{ $paciente->id }}</td>
                                     <td>{{ $paciente->nome }}</td>
-                                    <td>{{ $paciente->fone1 }}</td>
+                                    <td>{{ $paciente->telefone1 }}</td>
                                     <td>{{ $paciente->cpf }}</td>
                                     <td style="white-space: nowrap">
                                         <a href="{{ route('pacientes.edit', ['id' => $paciente->id]) }}"

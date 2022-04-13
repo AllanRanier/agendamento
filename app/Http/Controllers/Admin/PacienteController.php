@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PacienteStoreUpdateRequest;
 use App\Models\Grupo;
 use App\Models\Paciente;
+use Illuminate\Http\Request;
 
 class PacienteController extends Controller
 {
@@ -21,6 +22,13 @@ class PacienteController extends Controller
         return view('admin.paciente.index', compact('pacientes'));
     }
 
+    public function search(Request $request)
+    {
+        $pacientes = Paciente::search($request->parametro, $request->informacao)->paginate(15);
+        return view('admin.paciente.index', compact('pacientes'));
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -29,9 +37,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        $grupos = Grupo::orderBy('id', 'ASC')->get();
-
-        return view('admin.paciente.form', compact('grupos'));
+        return view('admin.paciente.form');
     }
 
     /**
@@ -48,17 +54,6 @@ class PacienteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -71,9 +66,8 @@ class PacienteController extends Controller
         if ($paciente == null) {
             return redirect()->back()->with('error', 'paciente não encontrado.');
         }
-        $grupos = Grupo::orderBy('id', 'ASC')->get();
 
-        return view('admin.paciente.form', compact('paciente', 'grupos'));
+        return view('admin.paciente.form', compact('paciente'));
     }
 
     /**
