@@ -78,16 +78,18 @@ class AgendamentoController extends Controller
      */
     public function edit($id)
     {
-        $agendamento = Grupo::find($id);
+        $agendamento = Agendamento::find($id);
 
         if ($agendamento == null) {
             return redirect()->back()->with('error', 'Grupo não encontrado.');
         }
 
-        $grupo = Grupo::orderBy('id', 'ASC')->get();
-        $paciente = Paciente::orderBy('id', 'ASC')->get();
+        // dd($agendamento);
 
-        return view('admin.agendamento.form', compact('agendamento', 'grupo', 'paciente'));
+        $grupos = Grupo::orderBy('id', 'ASC')->get();
+        $pacientes = Paciente::orderBy('id', 'ASC')->get();
+
+        return view('admin.agendamento.form', compact('agendamento', 'grupos', 'pacientes'));
     }
 
     /**
@@ -99,9 +101,9 @@ class AgendamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Grupo::find($id)->update($request->all());
+        Agendamento::find($id)->update($request->all());
 
-        return redirect()->route('agendamentos.index')->with('sucesso', 'Grupo editado com sucesso.');
+        return redirect()->route('agendamentos.index')->with('sucesso', 'Editado com sucesso.');
     }
 
     /**
@@ -112,8 +114,8 @@ class AgendamentoController extends Controller
      */
     public function destroy($id)
     {
-        Grupo::find($id)->delete();
+        Agendamento::find($id)->delete();
 
-        return redirect()->back()->with('sucesso', 'Grupo excluído com sucesso.');
+        return redirect()->back()->with('sucesso', 'Excluído com sucesso.');
     }
 }

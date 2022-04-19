@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Agendas')
+@section('title', 'Agendamento')
 
 @section('content_header')
     @if (isset($agendamento))
