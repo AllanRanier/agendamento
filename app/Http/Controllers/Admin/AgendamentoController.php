@@ -81,7 +81,7 @@ class AgendamentoController extends Controller
         $agendamento = Agendamento::find($id);
 
         if ($agendamento == null) {
-            return redirect()->back()->with('error', 'Grupo não encontrado.');
+            return redirect()->back()->with('error', 'Agendamento não encontrado.');
         }
 
         // dd($agendamento);

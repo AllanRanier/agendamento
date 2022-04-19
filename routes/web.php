@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\{
     PacienteController,
     UsuarioController,
 };
-
+use App\Http\Controllers\FrontEnd\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
+Route::get('/', [SiteController::class, 'index']);
+Route::get('/agendamento/{id}', [SiteController::class, 'agendamento'])->name('site.agendamento');
+Route::post('/agendamento/{id}/cadastrar', [SiteController::class, 'cadastrarAgendamento'])->name('site.cadastro');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
