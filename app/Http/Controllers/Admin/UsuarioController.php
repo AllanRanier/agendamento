@@ -64,8 +64,6 @@ class UsuarioController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
-
         return redirect()->route('usuarios.index')->with('sucesso', 'Cadastrado com sucesso.');
     }
 

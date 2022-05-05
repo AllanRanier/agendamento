@@ -36,11 +36,11 @@ Route::get('/agendamento/{id}/pdf', [SiteController::class, 'gerarPDF'])->name('
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
 
 
 
-Route::prefix('admin')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('usuarios')->group(function () {
