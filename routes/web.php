@@ -28,18 +28,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SiteController::class, 'index']);
 Route::get('/agendamento/{id}', [SiteController::class, 'agendamento'])->name('site.agendamento');
 Route::post('/agendamento/{id}/cadastrar', [SiteController::class, 'cadastrarAgendamento'])->name('site.cadastro');
+Route::get('/agendamento/{id}/concluido', [SiteController::class, 'concluidoAgendamento'])->name('site.concluido');
+Route::get('/agendamento/{id}/pdf', [SiteController::class, 'gerarPDF'])->name('pdf');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 
 
 Route::prefix('admin')->group(function () {
-
     Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('usuarios')->group(function () {

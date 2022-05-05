@@ -109,7 +109,7 @@
                                 <div class="col-sm-6 col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <label for=""><span style="color:red">*</span> Estado</label>
-                                        <input type="text" class="form-control" name="uf" id="uf" required value="">
+                                        <input type="text" class="form-control" name="uf" id="uf" maxlength="2" required>
                                     </div>
                                 </div>
                             </div>

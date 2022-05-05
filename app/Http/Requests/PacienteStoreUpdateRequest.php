@@ -24,16 +24,16 @@ class PacienteStoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required'],
-            'cpf' => ['required'],
-            'nascimento' => ['required'],
-            'telefone1' => ['required'],
-            'cep' => ['required'],
-            'logradouro' => ['required'],
-            'numero' => ['required'],
-            'bairro' => ['required'],
-            'cidade' => ['required'],
-            'uf' => ['required'],
+            'nome' => 'required',
+            'cpf' => 'required|unique:paciente',
+            'nascimento' => 'required',
+            'telefone1' => 'required',
+            'cep' => 'required',
+            'logradouro' => 'required',
+            'numero' => 'required',
+            'bairro' => 'required',
+            'cidade' => 'required',
+            'uf' => 'required',
         ];
     }
 
