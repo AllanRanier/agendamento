@@ -15,7 +15,8 @@
     <div class="card">
         <div class="card-body">
             @include('layouts.alert')
-            <form action="{{ !@$agendamento ? route('agendamentos.store') : route('agendamentos.update', ['id' => @$agendamento['id']]) }}"
+            <form
+                action="{{ !@$agendamento ? route('agendamentos.store') : route('agendamentos.update', ['id' => @$agendamento['id']]) }}"
                 method="POST">
                 @csrf
 
@@ -26,7 +27,8 @@
                             <select class="form-control" name="paciente_id" id="paciente_id">
                                 <option value="">Selecionar</option>
                                 @foreach ($pacientes as $option)
-                                    <option @if ($option->id == old('paciente_id') || $option->id == @$agendamento->paciente_id) selected @endif  value="{{ $option->id }}">{{ $option->nome }}</option>
+                                    <option @if ($option->id == old('paciente_id') || $option->id == @$agendamento->paciente_id) selected @endif value="{{ $option->id }}">
+                                        {{ $option->nome }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -37,7 +39,8 @@
                             <select class="form-control" name="grupo_id" id="grupo_id">
                                 <option value="">Selecionar</option>
                                 @foreach ($grupos as $option)
-                                    <option @if ($option->id == old('grupo_id') || $option->id == @$agendamento->grupo_id) selected @endif  value="{{ $option->id }}">{{ $option->nome }}</option>
+                                    <option @if ($option->id == old('grupo_id') || $option->id == @$agendamento->grupo_id) selected @endif value="{{ $option->id }}">
+                                        {{ $option->nome }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,7 +60,8 @@
             <button class="btn btn-sm btn-primary" type="submit"><i class="far fa-check-circle"></i> Enviar</button>
             <a class="btn btn-sm btn-danger" href="{{ route('agendamentos.create') }}"><i class="fa fa-ban"></i>
                 Limpar</a>
-            <a class="btn btn-sm btn-secondary" href="{{ route('agendamentos.index') }}"><i class="fas fa-chevron-left"></i>
+            <a class="btn btn-sm btn-secondary" href="{{ route('agendamentos.index') }}"><i
+                    class="fas fa-chevron-left"></i>
                 Voltar</a>
         </div>
     </div>
