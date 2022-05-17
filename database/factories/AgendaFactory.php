@@ -1,0 +1,22 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class AgendaFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'grupo_id' => 1,
+            'data_inicial' => now(),
+            'data_final' => now()->addDay(10),
+        ];
+    }
+}
